@@ -6,7 +6,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      working-directory: ./hedgehog-lab
+      working-directory: ./
     steps:
       - uses: actions/checkout@v1
       - name: Use Node.js 12.x
