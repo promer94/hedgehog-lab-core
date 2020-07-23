@@ -2,11 +2,11 @@ module.exports = {
   input: './src/index.ts',
   bundleNodeModules: true,
   output: {
-    format: ['esm-min'],
+    moduleName: 'HedgehogLabCore',
     target: 'browser',
-    sourceMapExcludeSources: true
+    sourceMapExcludeSources: true,
+    format: ["umd-min", 'esm-min', 'cjs-min']
   },
-  externals: ['babel-template'],
   plugins: {
     'node-polyfills': {},
   },

@@ -5,7 +5,7 @@
  * https://github.com/foxbenjaminfox/babel-plugin-overload
  */
 
-import template from 'babel-template';
+import template from '@babel/template'
 
 function invokedTemplate(op) {
   return template(`
@@ -22,24 +22,24 @@ function invokedTemplate(op) {
       else
         return LEFT_ARG ${op} RIGHT_ARG;
     })
-  `);
+  `)
 }
 
 export default function ({ types: t }) {
   return {
     visitor: {
       BinaryExpression(path) {
-        if (path.node.hasOwnProperty('_fromTemplate')) return;
+        if (path.node.hasOwnProperty('_fromTemplate')) return
 
         const func = invokedTemplate(path.node.operator)({
           LEFT_ARG: path.scope.generateUidIdentifier('left'),
           RIGHT_ARG: path.scope.generateUidIdentifier('right'),
-        }).expression;
+        }).expression
 
         path.replaceWith(
           t.callExpression(func, [path.node.left, path.node.right])
-        );
+        )
       },
     },
-  };
+  }
 }
